@@ -1,2 +1,2 @@
-# children-s-toy-store
+# childrens-toy-store
 children's toy store
