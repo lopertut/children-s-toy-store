@@ -10,8 +10,8 @@ public class App {
         do {
             System.out.println("List of tasks: ");
             System.out.println("0. Exit");
-            System.out.println("1. Add task");
-            System.out.println("2. Remove task");
+            System.out.println("1. Toys list");
+            System.out.println("2. Add toy");
             System.out.println("Enter task number: ");
             int task = scanner.nextInt();
 
@@ -21,7 +21,7 @@ public class App {
                     System.out.println("Goodbye!");
                     break;
                 case 1:
-                    System.out.println("task 1");
+                        System.out.println("task 1");
                     break;
                 case 2:
                     System.out.println("task 2");
