@@ -6,6 +6,7 @@ import org.lopertut.interfaces.Input;
 import java.util.List;
 import java.util.UUID;
 
+
 public class ToyAppHelper implements AppHelper<Toy>, Input {
 
     @Override
@@ -59,14 +60,26 @@ public class ToyAppHelper implements AppHelper<Toy>, Input {
         return true;
     }
 
-    public boolean removeToyById(List<Toy> toys, UUID id) {  // Removed @Override as it's likely not in the interface
-        if (toys == null || id == null) {
+    @Override
+    public boolean removeToy(List<Toy> toys) {
+        if (toys == null || toys.isEmpty()) {
+            System.out.println("нечего удалятль");
             return false;
         }
-        return toys.removeIf(toy -> toy != null && toy.getId().equals(id));
+
+        for (Toy toy : toys) {
+
+        }
+
+        return false;
     }
 
-    public boolean updateToyById(List<Toy> toys, UUID id) {  // Removed @Override as it's not in the interface
+    @Override
+    public boolean editToy(List<Toy> toys) {
+        return false;
+    }
+
+    public boolean editToy(List<Toy> toys, UUID id) {  // Removed @Override as it's not in the interface
         if (toys == null || id == null) {
             return false;
         }

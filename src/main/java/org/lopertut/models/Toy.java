@@ -17,9 +17,10 @@ public class Toy implements Serializable {
         this.id = UUID.randomUUID();
     }
 
-    public Toy(String name, List<String> materials, int recommendedAge) {
+    public Toy(String name, int price, List<String> materials, int recommendedAge) {
         this.id = UUID.randomUUID();
         this.name = name;
+        this.price = price;
         this.materials = materials;
         this.recommendedAge = recommendedAge;
     }

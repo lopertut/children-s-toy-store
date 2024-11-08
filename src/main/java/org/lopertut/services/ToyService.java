@@ -35,7 +35,7 @@ public class ToyService implements Service<Toy> {
     @Override
     public boolean edit(Toy toy) {
         List<Toy> toys = this.list();
-        boolean result = ((ToyAppHelper) appHelperToy).updateToyById(toys, toy.getId());
+        boolean result = ((ToyAppHelper) appHelperToy).editToy(toys, toy.getId());
         if (result) {
             storage.saveAll(toys, fileName); // Save updated toys list
         }
@@ -45,7 +45,7 @@ public class ToyService implements Service<Toy> {
     @Override
     public boolean remove(Toy toy) {
         List<Toy> toys = this.list();
-        boolean result = ((ToyAppHelper) appHelperToy).removeToyById(toys, toy.getId());
+        boolean result = ((ToyAppHelper) appHelperToy).removeToy(toys, toy.getId());
         if (result) {
             storage.saveAll(toys, fileName); // Save updated toys list
         }

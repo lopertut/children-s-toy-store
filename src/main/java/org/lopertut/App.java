@@ -55,7 +55,8 @@ public class App implements Input {
                     break;
                 case 3:
                     System.out.println("task 3");
-                    toyService.edit(Toy toy)
+                    Toy toy = new Toy();
+                    toyService.edit(toy);
                     break;
                 case 4:
                     System.out.println("task 4");
