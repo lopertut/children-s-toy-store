@@ -39,7 +39,6 @@ public class App implements Input {
                 case 0:
                     repeat = false;
                     System.out.println("Goodbye!");
-                    toyService.print();
                     break;
                 case 1:
                     System.out.println("task 1");
@@ -55,24 +54,24 @@ public class App implements Input {
                     break;
                 case 3:
                     System.out.println("task 3");
-                    Toy toy = new Toy();
-                    toyService.edit(toy);
+                    // edit toy
                     break;
                 case 4:
                     System.out.println("task 4");
-                    userService.print();
+                    // delete toy
                     break;
                 case 5:
                     System.out.println("task 5");
+                    userService.list();
+                    break;
+                case 6:
+                    System.out.println("task 6");
                     if (userService.add()) {
                         System.out.println("Added user");
                     } else {
                         System.out.println("Not added user");
                     }
                     break;
-                case 6:
-                    System.out.println("task 6");
-                    // userService.remove();
                 default:
                     System.out.println("Invalid task number");
                     break;

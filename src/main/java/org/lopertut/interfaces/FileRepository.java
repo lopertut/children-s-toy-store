@@ -24,7 +24,7 @@ public interface FileRepository<T> {
         } catch (IOException e) {
             System.out.println("Ошибка ввода информации");
         }
-    };
+    }
     default void saveAll(List<T> entities,String fileName){
         if(entities == null){entities = new ArrayList<>();}
         FileOutputStream fileOutputStream;
@@ -39,7 +39,7 @@ public interface FileRepository<T> {
         } catch (IOException e) {
             System.out.println("Ошибка ввода информации");
         }
-    };
+    }
     default List<T> load(String fileName){
         FileInputStream fileInputStream;
         ObjectInputStream objectInputStream;
