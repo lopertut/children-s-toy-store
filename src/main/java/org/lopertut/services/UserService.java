@@ -38,7 +38,7 @@ public class UserService implements Service<User>, Input {
 
     @Override
     public boolean print() {
-        return false;
+        return userAppHelper.printList(this.list());
     }
 
     @Override

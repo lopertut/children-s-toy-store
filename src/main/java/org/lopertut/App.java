@@ -62,7 +62,7 @@ public class App implements Input {
                     break;
                 case 5:
                     System.out.println("task 5");
-                    userService.list();
+                    userService.print();
                     break;
                 case 6:
                     System.out.println("task 6");

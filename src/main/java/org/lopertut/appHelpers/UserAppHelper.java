@@ -15,6 +15,8 @@ public class UserAppHelper implements AppHelper<User>, Input {
             user.setFirstname(getString());
             System.out.println("Фамилия пользователя: ");
             user.setLastname(getString());
+            System.out.println("Телефон пользователя: ");
+            user.setPhone(getString());
             return user;
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -24,11 +26,15 @@ public class UserAppHelper implements AppHelper<User>, Input {
 
     @Override
     public boolean printList(List<User> users) {
-        System.out.println("---------- Список пользователей --------");
-        for(int i=0;i<users.size();i++) {
-            User user = users.get(i);
-            System.out.printf("%d. %s %s. %s%n", i+1,user.getFirstname(),user.getLastname(), user.getPhone());
+        if (users == null || users.isEmpty()) {
+            System.out.println("Список пользователей пуст.");
+            return false;
         }
-        return false;
+        System.out.println("---------- Список пользователей --------");
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            System.out.printf("%d. %s %s. %s%n", i + 1, user.getFirstname(), user.getLastname(), user.getPhone());
+        }
+        return true;
     }
 }
