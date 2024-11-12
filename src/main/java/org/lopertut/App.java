@@ -9,10 +9,12 @@ public class App implements Input {
 
     private final Service<Toy> toyService;
     private final Service<User> userService;
+    private final Service<Purchase> purchaseService;
 
-    public App(Service<Toy> toyService, Service<User> userService) {
+    public App(Service<Toy> toyService, Service<User> userService, Service<Purchase> PurchaseService) {
         this.toyService = toyService;
         this.userService = userService;
+        this.purchaseService = PurchaseService;
     }
 
     public  void run() {
@@ -30,7 +32,7 @@ public class App implements Input {
             System.out.println("7. Edit user");
             System.out.println("8. Delete user");
             System.out.println("9. Buy toy");
-            System.out.println("0. history of bought toys");
+            System.out.println("10. history of bought toys");
 
             System.out.println("Enter task number: ");
             int task = Integer.parseInt(getString());
@@ -58,7 +60,7 @@ public class App implements Input {
                     break;
                 case 4:
                     System.out.println("task 4");
-                    // delete toy
+                    toyService.remove();
                     break;
                 case 5:
                     System.out.println("task 5");
@@ -71,6 +73,20 @@ public class App implements Input {
                     } else {
                         System.out.println("Not added user");
                     }
+                    break;
+                case 7:
+                    System.out.println("task 7");
+                    // edit user
+                    break;
+                case 8:
+                    System.out.println("task 8");
+                    // delete user
+                    break;
+                case 9:
+                    purchaseService.add();
+                    break;
+                case 10:
+                    purchaseService.print();
                     break;
                 default:
                     System.out.println("Invalid task number");

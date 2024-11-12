@@ -1,71 +1,36 @@
 package org.lopertut.appHelpers;
 
 import org.lopertut.interfaces.AppHelper;
-import org.lopertut.interfaces.FileRepository;
+import org.lopertut.interfaces.*;
 import org.lopertut.models.Purchase;
+import org.lopertut.models.User;
+import org.lopertut.models.Toy;
 
-public class PurchaseAppHelper implements AppHelper<Purchase> {
-    private final FileRepository<Purchase> purchaseRepository;
-    private final FileRepository<Client> clientRepository;
-    private final FileRepository<SportEquipment> sportEquipmentRepository;
-    private final Input inputProvider;
+import java.time.LocalDate;
+import java.util.List;
 
-    public AppHelperPurchase(FileRepository<Purchase> purchaseRepository, FileRepository<Client> clientRepository, FileRepository<SportEquipment> sportEquipmentRepository, Input inputProvider) {
-        this.purchaseRepository = purchaseRepository;
-        this.clientRepository = clientRepository;
-        this.sportEquipmentRepository = sportEquipmentRepository;
-        this.inputProvider = inputProvider;
-    }
+public class PurchaseAppHelper implements AppHelper<Purchase>, Input {
 
     @Override
     public Purchase create() {
         try {
-            // Выбор клиента по номеру
-            List<Client> clients = clientRepository.load();
-            if (clients.isEmpty()) {
-                System.out.println("Список клиентов пуст!");
-                return null;
-            }
+            System.out.print("Введите имя покупателя: ");
+            String firstName = getString();
+            System.out.print("Введите фамилию покупателя: ");
+            String lastName = getString();
+            User user = new User(firstName, lastName, "");
 
-            System.out.println("Выберите клиента:");
-            for (int i = 0; i < clients.size(); i++) {
-                System.out.printf("%d. %s %s%n", i + 1, clients.get(i).getFirstname(), clients.get(i).getLastname());
-            }
-            System.out.print("Введите номер клиента: ");
-            int clientIndex = Integer.parseInt(getInput()) - 1;
+            System.out.print("Введите название игрушки: ");
+            String toyName = getString();
+            System.out.print("Введите цену игрушки: ");
+            int toyPrice = Integer.parseInt(getString());
+            Toy toy = new Toy(toyName, toyPrice, null, 0);
 
-            if (clientIndex < 0 || clientIndex >= clients.size()) {
-                System.out.println("Некорректный номер клиента!");
-                return null;
-            }
-            Client client = clients.get(clientIndex);
-
-            // Выбор спортивного инвентаря по номеру
-            List<SportEquipment> equipmentList = sportEquipmentRepository.load();
-            if (equipmentList.isEmpty()) {
-                System.out.println("Список спортивного инвентаря пуст!");
-                return null;
-            }
-
-            System.out.println("Выберите спортивный инвентарь:");
-            for (int i = 0; i < equipmentList.size(); i++) {
-                System.out.printf("%d. %s (Цена: %.2f)%n", i + 1, equipmentList.get(i).getName(), equipmentList.get(i).getPrice());
-            }
-            System.out.print("Введите номер спортивного инвентаря: ");
-            int equipmentIndex = Integer.parseInt(getInput()) - 1;
-
-            if (equipmentIndex < 0 || equipmentIndex >= equipmentList.size()) {
-                System.out.println("Некорректный номер спортивного инвентаря!");
-                return null;
-            }
-            SportEquipment equipment = equipmentList.get(equipmentIndex);
-
-            // Ввод даты покупки
             System.out.print("Введите дату покупки (гггг-мм-дд): ");
-            String dateInput = getInput();
+            String dateInput = getString();
             LocalDate purchaseDate = LocalDate.parse(dateInput);
 
-            return new Purchase(client, equipment, purchaseDate);
+            return new Purchase(user, toy, purchaseDate);
         } catch (Exception e) {
             System.out.println("Ошибка при создании покупки: " + e.getMessage());
             return null;
@@ -73,18 +38,15 @@ public class PurchaseAppHelper implements AppHelper<Purchase> {
     }
 
     @Override
-    public void printList(List<Purchase> elements) {
+    public boolean printList(List<Purchase> purchases) {
+        if (purchases == null || purchases.isEmpty()) {
+            System.out.println("Список покупок пуст.");
+            return false;
+        }
         System.out.println("---------- Список покупок --------");
-        elements.forEach(System.out::println);
+        for (int i = 0; i < purchases.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, purchases.get(i).toString());
+        }
+        return true;
     }
-
-    @Override
-    public FileRepository<Purchase> getRepository() {
-        return purchaseRepository;
-    }
-
-    private String getInput() {
-        return inputProvider.getInput();
-    }
-}
 }

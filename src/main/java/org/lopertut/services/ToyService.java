@@ -39,7 +39,20 @@ public class ToyService implements Service<Toy> {
 
     @Override
     public boolean remove(Toy toy) {
-        return false;
+        try {
+            List<Toy> toys = storage.load(fileName);  // Загружаем все игрушки
+            boolean removed = toys.removeIf(existingToy -> existingToy.getId().equals(toy.getId()));
+            if (removed) {
+                storage.saveAll(toys, fileName);  // Сохраняем обновленный список
+                System.out.println("Игрушка успешно удалена.");
+            } else {
+                System.out.println("Игрушка не найдена.");
+            }
+            return removed;
+        } catch (Exception e) {
+            System.out.println("Ошибка при удалении игрушки: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

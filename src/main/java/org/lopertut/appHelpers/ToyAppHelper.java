@@ -59,4 +59,13 @@ public class ToyAppHelper implements AppHelper<Toy>, Input {
         System.out.println(sbToys);
         return true;
     }
+
+
+    public boolean delete(List<Toy> toys) {
+        if (toys == null || toys.isEmpty()) {
+            return false;
+        }
+
+
+    }
 }

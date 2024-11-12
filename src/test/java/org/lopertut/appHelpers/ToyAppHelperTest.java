@@ -2,7 +2,6 @@ package org.lopertut.appHelpers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.lopertut.appHelpers.ToyAppHelper;
 import org.lopertut.models.Toy;
 
 import java.util.ArrayList;
