@@ -49,4 +49,14 @@ public class PurchaseAppHelper implements AppHelper<Purchase>, Input {
         }
         return true;
     }
+
+    @Override
+    public int delete(List<Purchase> elements) {
+        return 0;
+    }
+
+    @Override
+    public Purchase edit(List<Purchase> elements) {
+        return null;
+    }
 }

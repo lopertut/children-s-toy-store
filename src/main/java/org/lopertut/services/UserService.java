@@ -27,12 +27,12 @@ public class UserService implements Service<User>, Input {
     }
 
     @Override
-    public boolean edit(User entity) {
+    public boolean edit() {
         return false;
     }
 
     @Override
-    public boolean remove(User entity) {
+    public boolean remove() {
         return false;
     }
 

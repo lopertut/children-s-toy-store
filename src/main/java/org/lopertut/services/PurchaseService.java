@@ -33,13 +33,16 @@ public class PurchaseService implements Service<Purchase> {
     }
 
     @Override
+    public boolean edit() {
+        return false;
+    }
+
     public boolean edit(Purchase entity) {
         return false;
     }
 
-
     @Override
-    public boolean remove(Purchase entity) {
+    public boolean remove() {
         return false;
     }
 

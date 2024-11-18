@@ -37,4 +37,14 @@ public class UserAppHelper implements AppHelper<User>, Input {
         }
         return true;
     }
+
+    @Override
+    public int delete(List<User> elements) {
+        return 0;
+    }
+
+    @Override
+    public User edit(List<User> elements) {
+        return null;
+    }
 }

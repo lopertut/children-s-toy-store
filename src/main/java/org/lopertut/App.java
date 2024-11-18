@@ -37,6 +37,8 @@ public class App implements Input {
             System.out.println("Enter task number: ");
             int task = Integer.parseInt(getString());
 
+            Toy toy = new Toy();
+
             switch (task) {
                 case 0:
                     repeat = false;
@@ -56,7 +58,7 @@ public class App implements Input {
                     break;
                 case 3:
                     System.out.println("task 3");
-                    // edit toy
+                    toyService.edit();
                     break;
                 case 4:
                     System.out.println("task 4");
