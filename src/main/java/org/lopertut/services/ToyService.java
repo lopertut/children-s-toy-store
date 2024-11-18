@@ -20,6 +20,7 @@ public class ToyService implements Service<Toy>, Input {
         this.storage = storage;
     }
 
+
     @Override
     public boolean add() {
         try {
@@ -33,31 +34,41 @@ public class ToyService implements Service<Toy>, Input {
         return false;
     }
 
+
     @Override
     public boolean edit() {
         try {
+            // Загружаем список игрушек
             List<Toy> toys = storage.load(fileName);
-            Toy toy = appHelperToy.edit(toys);
 
+            // Проверка на пустоту списка
             if (toys.isEmpty()) {
-                System.out.println("Список игрушек пуст. Нечего удалять.");
+                System.out.println("Список игрушек пуст. Нечего изменять.");
                 return false;
             }
 
-            toys.set(toys.indexOf(toy), toy );
-            // Сохранение обновленного списка обратно в файл
-            storage.save(toy, fileName);
-            return true;
+            // Изменение игрушки
+            Toy updatedToy = appHelperToy.edit(toys);
+
+            // Если игрушка успешно изменена, сохраняем обновленный список
+            if (updatedToy != null) {
+                storage.saveAll(toys, fileName);
+                System.out.println("Игрушка успешно изменена.");
+                return true;
+            }
+
+            System.out.println("Изменение игрушки не выполнено.");
+            return false;
 
         } catch (NumberFormatException e) {
-            System.out.println("Ошибка: введено некорректное значение. Пожалуйста, введите число.");
+            System.out.println("Ошибка: некорректное значение. Пожалуйста, введите число.");
             return false;
         } catch (Exception e) {
-            // Обработка любых других исключений
-            System.out.println("Ошибка при удалении игрушки: " + e.getMessage());
+            System.out.println("Ошибка при изменении игрушки: " + e.getMessage());
             return false;
         }
     }
+
 
     @Override
     public boolean remove() {
@@ -90,14 +101,10 @@ public class ToyService implements Service<Toy>, Input {
             System.out.println("Игрушка \"" + toyToRemove.getName() + "\" успешно удалена.");
             return true;
 
-        } catch (NumberFormatException e) {
-            System.out.println("Ошибка: введено некорректное значение. Пожалуйста, введите число.");
-            return false;
         } catch (Exception e) {
-            // Обработка любых других исключений
-            System.out.println("Ошибка при удалении игрушки: " + e.getMessage());
-            return false;
+            System.out.println("Error: " + e.getMessage());
         }
+        return false;
     }
 
 
