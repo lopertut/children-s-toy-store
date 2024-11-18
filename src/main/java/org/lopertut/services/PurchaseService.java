@@ -37,10 +37,6 @@ public class PurchaseService implements Service<Purchase> {
         return false;
     }
 
-    public boolean edit(Purchase entity) {
-        return false;
-    }
-
     @Override
     public boolean remove() {
         return false;
