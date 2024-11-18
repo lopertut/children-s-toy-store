@@ -78,11 +78,11 @@ public class App implements Input {
                     break;
                 case 7:
                     System.out.println("task 7");
-                    // edit user
+                    userService.edit();
                     break;
                 case 8:
                     System.out.println("task 8");
-                    // delete user
+                    userService.remove();
                     break;
                 case 9:
                     purchaseService.add();
